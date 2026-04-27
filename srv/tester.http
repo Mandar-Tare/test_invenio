@@ -1,0 +1,176 @@
+### Get service entity document get entity set of enitre service 
+http://localhost:4004/odata/v4/CatalogService/
+
+### Service metadata document - entities and their respective properties
+http://localhost:4004/odata/v4/CatalogService/$metadata
+
+### Get all the employee data  in JSON format
+http://localhost:4004/odata/v4/CatalogService/EmployeSet?$format=json
+
+### Get the top two rcords
+
+http://localhost:4004/odata/v4/CatalogService/EmployeSet?$top=2
+
+### Get the top two records and skip the top two data by chunk
+http://localhost:4004/odata/v4/CatalogService/EmployeSet?$skip=2&$top=2
+
+### Get the total count of the record 
+
+http://localhost:4004/odata/v4/CatalogService/EmployeSet/$count
+
+### Filter Data
+http://localhost:4004/odata/v4/CatalogService/EmployeSet?$filter=bankName eq 'My Bank of San Francisco'
+
+### Pattern Data match get the data with records name starting Su
+
+http://localhost:4004/odata/v4/CatalogService/EmployeSet?$filter=contains(nameFirst,'Su')
+
+
+### Get the total count of records
+http://localhost:4004/odata/v4/CatalogService/EmployeSet/$count
+
+### Get the record with minimal data set
+
+http://localhost:4004/odata/v4/CatalogService/EmployeSet?$select=nameFirst,ID,email
+
+
+### Get the data by Id of a particular employee
+http://localhost:4004/odata/v4/CatalogService/EmployeSet/02BD2137-0890-1EEA-A6C2-BB55C197E7FB
+
+### Insert a new record in the employee table DB
+POST  http://localhost:4004/odata/v4/CatalogService/EmployeSet
+Content-Type:  application/json
+
+{
+ "nameFirst": "Mandar",
+  "nameMiddle": null,
+  "nameLast": "Tare",
+  "nameInitials": null,
+  "sex": "M",
+  "language": "E",
+  "phoneNumber": null,
+  "email": "mandar.tare@gmail.com",
+  "loginName": "WINTERW",
+  "Currency_code": "USD",
+  "salaryAmount": 5000,
+  "accountNumber": "7766554433",
+  "bankId": "12100038",
+  "bankName": "State Bank of India"
+  }
+
+### Change the data of a particular employee
+  PATCH  http://localhost:4004/odata/v4/CatalogService/EmployeSet/02BD2137-0890-1EEA-A6C2-BB55C197E7FB
+  Content-Type:  application/json
+  
+  {
+         "salaryAmount": 20000000
+
+  }
+
+### Remove the employeee
+  
+ DELETE   http://localhost:4004/odata/v4/CatalogService/EmployeSet/02BD2137-0890-1EEA-A6C2-BB55C197E7FB
+
+
+### Get all POS
+http://localhost:4004/odata/v4/CatalogService/POs
+
+### Get Single PO
+
+
+http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052
+
+
+### Load dependent data for PO
+
+http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052/Items
+
+###Load PO and its dependent items data together
+
+http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052?$expand=Items
+
+
+### Get Data from a cds View entity
+
+http://localhost:4004/odata/v4/CatalogService/ProductCDS
+
+
+###  Mixing Concept 
+
+http://localhost:4004/odata/v4/CatalogService/ProductCDS/74867AD200E41EDBA5D8B06B26EB6052?$expand=To_Items
+
+
+### Calling Boost action 
+
+POST  http://localhost:4004/odata/v4/CatalogService/POs('74867AD200E41EDBA5D8B0C98DC28052')/CatalogService.boost
+Content-Type:  application/json
+
+{}
+
+
+### Calling Get Larget function 
+
+GET http://localhost:4004/odata/v4/CatalogService/getLargestOrder()
+
+
+###
+
+POST  http://localhost:4004/odata/v4/CatalogService/EmployeSet
+Content-Type:  application/json
+
+{
+ "nameFirst": "Madhur",
+  "nameMiddle": null,
+  "nameLast": "Tare",
+  "nameInitials": null,
+  "sex": "M",
+  "language": "E",
+  "phoneNumber": null,
+  "email": "mandar.tare@gmail.com",
+  "loginName": "WINTERW",
+  "Currency_code": "USD",
+  "salaryAmount": 5000,
+  "accountNumber": "7766554433",
+  "bankId": "12100038",
+  "bankName": "State Bank of India"
+  }
+
+###
+
+//bEFORE GENERIC HANDLER EXAMPLE
+
+PATCH   http://localhost:4004/odata/v4/CatalogService/EmployeSet/d4364a6e-2877-4810-b753-3b04ef5ea7fb
+Content-Type:  application/json
+
+{
+
+  "salaryAmount" : 10000000
+}
+
+
+
+//Read Custom entity 
+###
+http://localhost:4004/odata/v4/MyService/ReadEmployeeSrv
+
+###
+DELETE  http://localhost:4004/odata/v4/MyService/ReadEmployeeSrv/02BD2137-0890-1EEA-A6C2-BB55C19787FB
+
+###
+
+http://localhost:34219/odata/v4/MyService/ReadEmployeeSrv
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

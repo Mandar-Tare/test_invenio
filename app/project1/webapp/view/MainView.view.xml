@@ -1,0 +1,165 @@
+<mvc:View controllerName="demo.project1.controller.MainView"
+    	xmlns="sap.gantt.simple"
+		xmlns:axistime="sap.gantt.axistime"
+		xmlns:config="sap.gantt.config"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:shapes="sap.gantt.simple.shapes"
+		xmlns:table="sap.ui.table"
+        xmlns:fb="sap.ui.comp.filterbar"
+        xmlns:svm="sap.ui.comp.smartvariants"
+		xmlns:m="sap.m"
+		xmlns:core="sap.ui.core"
+		xmlns:rm="sap.ui.table.rowmodes"
+        xmlns:sfb="sap.ui.comp.smartfilterbar"
+        xmlns:f= "sap.f" >
+
+
+    <f:DynamicPage id="dynamicPage" fitContent="true" headerExpanded="true">
+        <f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<svm:SmartVariantManagement id="svm" showExecuteOnSelection="true" persistencyKey="CapacityPlanning" />
+					</f:heading>
+					
+				</f:DynamicPageTitle>
+			</f:title>
+
+		<f:header>
+        <f:DynamicPageHeader>
+					<f:content>
+						<fb:FilterBar id="filterbar" persistencyKey="myPersKey" useToolbar="false" search=".onSearch" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+							<fb:filterGroupItems>
+								<fb:FilterGroupItem name="Evaluation Horizon" label="Evaluation Horizon" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										
+								
+											<m:DynamicDateRange
+											required="true"
+					
+					id="dynamic-range"
+					change=".onChange"
+					width="{env>/filterInputWidth}"/>
+									</fb:control>
+								</fb:FilterGroupItem>
+								<fb:FilterGroupItem name="Work Centre" label="Work Centre" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										<m:Input name="Work Centre" showValueHelp="true" >
+										</m:Input>
+									</fb:control>
+								</fb:FilterGroupItem>
+								<fb:FilterGroupItem name="Product" label="Product" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										<m:Input name="Product" showValueHelp="true" >
+										</m:Input>
+									</fb:control>
+								</fb:FilterGroupItem>
+								<fb:FilterGroupItem name="SupplierName" label="Status" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										<m:MultiComboBox
+											name="Status"
+											selectionChange=".onSelectionChange"
+											items="{
+												path: '/ProductSuppliers',
+												templateShareable: true
+											}"
+										>
+											<core:Item key="{key}" text="{name}"/>
+										</m:MultiComboBox>
+									</fb:control>
+								</fb:FilterGroupItem>
+							</fb:filterGroupItems>
+
+						</fb:FilterBar>
+					</f:content>
+				</f:DynamicPageHeader>
+
+			
+		</f:header>
+        <f:content>
+           
+           	<GanttChartContainer>
+            <toolbar>
+             <ContainerToolbar >
+	   <m:HBox width="67%"></m:HBox>
+			 <m:HBox > <m:Button
+                text="Download"
+                icon="sap-icon://download"
+                press=".onDownloadPress" />
+			</m:HBox>
+			 
+
+            
+             </ContainerToolbar>
+             </toolbar>
+
+             <GanttChartWithTable id="gantt" shapeSelectionMode="Single" >
+			<axisTimeStrategy>
+				<axistime:ProportionZoomStrategy>
+					<axistime:totalHorizon>
+						<config:TimeHorizon
+								startTime="20241114000000"
+								endTime="20260504000000"/>
+					</axistime:totalHorizon>
+					<axistime:visibleHorizon>
+						<config:TimeHorizon
+								startTime="20241114000000"
+								endTime="20260504000000"/>
+					</axistime:visibleHorizon>
+				</axistime:ProportionZoomStrategy>
+			</axisTimeStrategy>
+			<table>
+				<table:TreeTable
+						selectionMode="MultiToggle"
+						selectionBehavior="RowSelector"
+						enableColumnReordering="true"
+						rowSelectionChange=".onRowSelectionChange"
+						rows="{
+						path: '/root',
+						parameters: {
+							arrayNames: ['children'],
+							numberOfExpandedLevels: 0
+						}
+					}">
+					<table:columns>
+						<table:Column>
+							<m:Text text="No of Months"/>
+							<table:template>
+								<m:Label text="{text}"/>
+							</table:template>
+						</table:Column>
+					</table:columns>
+					<table:rowMode>
+						<rm:Auto minRowCount="12"/>
+					</table:rowMode>
+					<table:rowSettingsTemplate>
+						<GanttRowSettings rowId="{id}" shapes1="{path: 'task', templateShareable:false}"
+										  >
+							
+						<shapes1>
+							<BaseConditionalShape activeShape="0">
+								<shapes>
+									<BaseRectangle time="{path: 'startTime', formatter: '.fnTimeConverter'}"
+												   endTime="{path: 'endTime', formatter: '.fnTimeConverter'}"
+												   fill="@sapUiChartPaletteQualitativeHue1" />
+									
+								</shapes>
+							</BaseConditionalShape>
+						</shapes1>
+							
+						</GanttRowSettings>
+					</table:rowSettingsTemplate>
+				</table:TreeTable>
+			</table>
+		</GanttChartWithTable>
+            </GanttChartContainer>
+
+            
+             
+
+        </f:content>
+
+    <!-- </m:Page> -->
+    	</f:DynamicPage>
+
+
+</mvc:View>

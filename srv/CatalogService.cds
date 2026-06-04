@@ -1,4 +1,4 @@
-using { anubhav.db.master,anubhav.db.transaction } from '../db/datamodel';
+using { mandar.db.master,mandar.db.transaction } from '../db/datamodel';
 using {cappo.cds} from '../db/CDSViews';
 service CatalogService @(path:'CatalogService')   
 {
@@ -53,6 +53,12 @@ service CatalogService @(path:'CatalogService')
     //     To_Items
     // };
     // entity ItemView as projection on cds.CDSViews.ItemView;
+
+    // entity MasterCapacitySet
+     //   as projection on master.MasterCapacity;
+
+     entity MasterCapacity 
+     as projection on master.MasterCapacity;
 
 
 }

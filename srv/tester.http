@@ -19,10 +19,9 @@ http://localhost:4004/odata/v4/CatalogService/EmployeSet?$skip=2&$top=2
 http://localhost:4004/odata/v4/CatalogService/EmployeSet/$count
 
 ### Filter Data
-http://localhost:4004/odata/v4/CatalogService/EmployeSet?$filter=bankName eq 'My Bank of San Francisco'
+http://localhost:4004/odata/v4/CatalogService/EmployeSet?$filter=bankNameeq'My Bank of San Francisco'
 
 ### Pattern Data match get the data with records name starting Su
-
 http://localhost:4004/odata/v4/CatalogService/EmployeSet?$filter=contains(nameFirst,'Su')
 
 

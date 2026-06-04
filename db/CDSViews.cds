@@ -1,6 +1,6 @@
 namespace cappo.cds;
 
-using { anubhav.db.master, anubhav.db.transaction } from './datamodel';
+using { mandar.db.master, mandar.db.transaction } from './datamodel';
 
 context CDSViews {
 

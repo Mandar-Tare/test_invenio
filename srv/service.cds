@@ -1,4 +1,4 @@
-using {anubhav.db.master} from '../db/datamodel';
+using {mandar.db.master} from '../db/datamodel';
 
 service MyService @(path:'MyService')
 {

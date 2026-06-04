@@ -6,6 +6,7 @@
     "@cap-js/hana": "^2",
     "@cap-js/postgres": "^2.3.0",
     "@sap/cds": "^9",
+    "@sap/xssec": "^4",
     "express": "^4"
   },
   "devDependencies": {
@@ -14,13 +15,29 @@
   },
   "scripts": {
     "start": "cds-serve",
-    "watch-purchaseorderapp": "cds watch --open inv.purchaseorderapp/index.html?sap-ui-xx-viewCache=false --livereload false"
+    "watch-purchaseorderapp": "cds watch --open inv.purchaseorderapp/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-project1": "cds watch --open demo.project1/index.html?sap-ui-xx-viewCache=false --livereload false"
   },
   "private": true,
   "workspaces": [
     "app/*"
   ],
   "sapux": [
-    "app/purchaseorderapp"
-  ]
+    "app/purchaseorderapp",
+    "app/project1"
+  ],
+  "cds": {
+    "requires": {
+      "[production]": {
+        "auth": "xsuaa"
+      },
+      "db": {
+        "kind": "sqlite",
+        "model": "db/schema.cds",
+        "credentials": {
+          "url": "sqlite.db"
+        }
+      }
+    }
+  }
 }

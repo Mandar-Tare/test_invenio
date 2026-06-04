@@ -1,7 +1,7 @@
-namespace anubhav.db;
+namespace mandar.db;
 
 using { cuid, managed, temporal, Currency } from '@sap/cds/common';
-using { anubhav.common } from './commons';
+using { mandar.common } from './commons';
 
 context master {
     
@@ -65,9 +65,38 @@ context master {
         Currency: Currency;
         salaryAmount: common.AmountT;
         accountNumber: String(16);
-        bankId: String(8);
+        bankId: String(40);
         bankName: String(64);
     }
+
+   /* entity MasterCapacity {
+
+    key VBELN : Integer;
+    AUFNR : String(20);
+    MATNR : String(40);
+    WERKS : String(10);
+    ERDAT : String(10);
+    ERZET : String(8);
+    ERZAT : String(8);
+    STATUS : String(20);
+    QUANTITY: Decimal(15,3);
+    DESCRIPTION : String(255);
+
+}*/
+
+entity MasterCapacity {
+    key MANDT     : String(3); // Client
+    key VBELN     : String(10); // Sales Document Number
+    key POSNR     : String(6); // Item Number
+        ARKTX     : String(40); // Item Text / Short Description
+        NETWR     : Decimal(15, 2); // Net Value
+        WAERK     : String(5); // Currency Key
+        ERDAT     : Date; // Creation Date
+        ERZET     : Time; // Creation Time
+        ERZAT     : Time;
+        KUNNR_ANA : String(10); // Account Assignment Customer
+}
+
 }
 
 context transaction {
@@ -87,4 +116,5 @@ context transaction {
         PRODUCT_GUID: Association to master.product @(title : '{i18n>PRODUCT_GUID}');
     }
 }
+
 
